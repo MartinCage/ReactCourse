@@ -7,7 +7,7 @@ import TapButton from "./components/TapButton";
 import { EXAMPLES } from "./data";
 
 function App() {
-  const [selectedTopic, setSelectedTopic] = useState("components");
+  const [selectedTopic, setSelectedTopic] = useState();
 
   function handleClick(selectedButton) {
     setSelectedTopic(selectedButton);
@@ -40,13 +40,16 @@ function App() {
             <TapButton onClick={() => handleClick("props")}>Props</TapButton>
             <TapButton onClick={() => handleClick("state")}>State</TapButton>
           </menu>
-          <div id="tab-content">
-            <h3>{EXAMPLES[selectedTopic].title}</h3>
-            <p>{EXAMPLES[selectedTopic].description}</p>
-            <pre>
-              <code>{EXAMPLES[selectedTopic].code}</code>
-            </pre>
-          </div>
+          {!selectedTopic && <p>Please select a topic</p>}
+          {selectedTopic && (
+            <div id="tab-content">
+              <h3>{EXAMPLES[selectedTopic].title}</h3>
+              <p>{EXAMPLES[selectedTopic].description}</p>
+              <pre>
+                <code>{EXAMPLES[selectedTopic].code}</code>
+              </pre>
+            </div>
+          )}
         </section>
       </main>
     </div>
